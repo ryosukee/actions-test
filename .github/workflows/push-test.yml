@@ -11,8 +11,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: add a file 
-        run: touch hoge.txt
+      - name: make changes
+        run: |
+          touch hoge2.txt
+          echo "hoge content" > hoge.txt
       
       - name: commit changes
         run: |
