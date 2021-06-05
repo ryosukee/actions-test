@@ -13,8 +13,8 @@ jobs:
 
       - name: make-changes
         run: |
-          touch hoge2.txt
-          echo "hoge content" > hoge.txt
+          touch add-file-from-ci.txt
+          echo "add text from ci" > some.txt
           echo "STATUS=$(git status --porcelain | tr -d "\n")" >> $GITHUB_ENV
       
       - name: commit
