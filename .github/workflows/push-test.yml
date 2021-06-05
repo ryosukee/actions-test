@@ -11,21 +11,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: make changes
+      - name: make-changes
         run: |
           touch hoge2.txt
           echo "hoge content" > hoge.txt
+          echo "STATUS=$(git status --porcelain)" >> $GITHUB_ENV
       
-      - name: commit changes
-        if: ${{ [ -n `git status --porcelain` ] }}
+      - name: commit
+        if: env.STATUS == ""
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m "hore(ci): make format in"
       
-      - name: push changes
-        if: ${{ [ -n `git status --porcelain` ] }}
+      - name: push
+        if: steps.commit.conclusion != 'skipped'
         uses: ad-m/github-push-action@master
         with:
           branch: ${{ github.event.pull_request.head.ref }}
