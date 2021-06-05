@@ -18,7 +18,7 @@ jobs:
           echo "STATUS=$(git status --porcelain)" >> $GITHUB_ENV
       
       - name: commit
-        if: env.STATUS == ""
+        if: ${{ env.STATUS == '' }}
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
@@ -26,7 +26,7 @@ jobs:
           git commit -m "hore(ci): make format in"
       
       - name: push
-        if: steps.commit.conclusion != 'skipped'
+        if: ${{ steps.commit.conclusion != 'skipped' }}
         uses: ad-m/github-push-action@master
         with:
           branch: ${{ github.event.pull_request.head.ref }}
