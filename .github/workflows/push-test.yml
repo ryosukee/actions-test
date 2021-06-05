@@ -17,6 +17,7 @@ jobs:
           echo "hoge content" > hoge.txt
       
       - name: commit changes
+        if: ${{ [ -n `git status --porcelain` ] }}
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
@@ -24,6 +25,7 @@ jobs:
           git commit -m "hore(ci): make format in"
       
       - name: push changes
+        if: ${{ [ -n `git status --porcelain` ] }}
         uses: ad-m/github-push-action@master
         with:
           branch: ${{ github.event.pull_request.head.ref }}
