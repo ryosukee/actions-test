@@ -1,11 +1,10 @@
-name: Golang CI
+name: push test
 
-on:
-  pull_request:
-    paths:
-      - "*"
+on: pull_request
 
 jobs:
+  push-test:
+    name: push-test-job
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
