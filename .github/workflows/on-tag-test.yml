@@ -21,3 +21,35 @@ jobs:
 
       - name: Echo2
         run: echo ${{ env.TAG_NAME }}
+
+      - name: dispatch1
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          repository: ryosukee/actions-test2
+          token: ${{ secrets.MACHINE_USER_TOKEN }}
+          event-type: echo
+          client-payload: '{ "new_tag": "$TAG_NAME", "type": "1" }'
+
+      - name: dispatch2
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          repository: ryosukee/actions-test2
+          token: ${{ secrets.MACHINE_USER_TOKEN }}
+          event-type: echo
+          client-payload: '{ "new_tag": $TAG_NAME, "type": "2" }'
+
+      - name: dispatch3
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          repository: ryosukee/actions-test2
+          token: ${{ secrets.MACHINE_USER_TOKEN }}
+          event-type: echo
+          client-payload: '{ "new_tag": "${{ env.TAG_NAME }}", "type": "3" }'
+
+      - name: dispatch4
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          repository: ryosukee/actions-test2
+          token: ${{ secrets.MACHINE_USER_TOKEN }}
+          event-type: echo
+          client-payload: '{ "new_tag": ${{ env.TAG_NAME }}, "type": "4" }'
