@@ -1,0 +1,25 @@
+name: on tag
+
+on:
+  push:
+    tags:
+      - stg-*
+
+env:
+  TAG_NAME: ${GITHUB_REF#refs/*/}
+
+jobs:
+  build:
+    name: Tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Echo1
+        run: |
+          echo $TAG_NAME
+
+      - name: Echo2
+        run: |
+          echo $TAG_NAME
