@@ -36,7 +36,7 @@ jobs:
           repository: ryosukee/actions-test2
           token: ${{ secrets.MACHINE_USER_TOKEN }}
           event-type: echo
-          client-payload: '{ "new_tag": "${TAG_NAME}"", "type": "2" }'
+          client-payload: '{ "new_tag": "${TAG_NAME}", "type": "2" }'
 
       - name: dispatch3
         uses: peter-evans/repository-dispatch@v1
