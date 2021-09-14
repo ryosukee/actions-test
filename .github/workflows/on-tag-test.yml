@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - stg-*
+      - prd-*
 
 jobs:
   build:
@@ -15,6 +16,20 @@ jobs:
       
       - name: set tag env
         run: echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: set stg env
+        if: startsWith(env.TAG_NAME, 'stg')
+        run: echo "ENV=stg" >> $GITHUB_ENV
+
+      - name: set prd env
+        if: startsWith(env.TAG_NAME, 'prd')
+        run: echo "ENV=prd" >> $GITHUB_ENV
+
+      - name: Echo env1
+        run: echo $ENV
+
+      - name: Echo env2
+        run: echo ${{ env.ENV }}
 
       - name: Echo1
         run: echo $TAG_NAME
