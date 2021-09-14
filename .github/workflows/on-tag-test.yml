@@ -28,17 +28,25 @@ jobs:
 
       - name: set stg env
         if: startsWith(env.TAG_NAME, 'stg')
-        run: echo "ENV=stg" >> $GITHUB_ENV
+        run: |
+          echo "ENV=stg" >> $GITHUB_ENV
+          echo "BASE_ENV=develop" >> $GITHUB_ENV
 
       - name: set prd env
         if: startsWith(env.TAG_NAME, 'prd')
-        run: echo "ENV=prd" >> $GITHUB_ENV
+        run: |
+          echo "ENV=prd" >> $GITHUB_ENV
+          echo "BASE_ENV=stg" >> $GITHUB_ENV
 
       - name: Echo env1
-        run: echo $ENV
+        run: |
+          echo $ENV
+          echo $BASE_ENV
 
       - name: Echo env2
-        run: echo ${{ env.ENV }}
+        run: |
+          echo ${{ env.ENV }}
+          echo ${{ env.BASE_ENV }}
 
       - name: Echo1
         run: echo $TAG_NAME
