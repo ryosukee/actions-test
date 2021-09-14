@@ -17,6 +17,15 @@ jobs:
       - name: set tag env
         run: echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
+      - name: Echo env before dev
+        run: echo $ENV
+
+      - name: set dev env
+        run: echo "ENV=dev" >> $GITHUB_ENV
+
+      - name: Echo env after dev
+        run: echo $ENV
+
       - name: set stg env
         if: startsWith(env.TAG_NAME, 'stg')
         run: echo "ENV=stg" >> $GITHUB_ENV
