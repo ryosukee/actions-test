@@ -13,6 +13,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: sleep1
+        run: sleep 10
+
+      - name: sleep2
+        run: sleep 10
+
+      - name: sleep3
+        run: sleep 10
       
       - name: set tag env
         run: echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
